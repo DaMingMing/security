@@ -1,6 +1,6 @@
 package com.keymao.security.springmvc.init;
 
-;
+
 import com.keymao.security.springmvc.config.ApplicationConfig;
 import com.keymao.security.springmvc.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
