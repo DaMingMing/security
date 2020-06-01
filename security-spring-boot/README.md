@@ -12,3 +12,9 @@
 3、负责授权的FilterSecurityInterceptor,干活的是AccessDecisionnManager（决策管理器）
 4、负责处理异常的filter
 
+
+认证流程：
+用户提交账号密码--->UsernamePasswordAuthenticationFilter处理--->交给AuthenticationManager处理
+--->委托DaoAuthenticationProvider验证--->通过UserDetailService判断用户是否存在--->存在则返回查询到UserDetails
+--->通过密码编码器对比UserDetails跟用户输入的密码是否一致--->一致后将用户信息Authentication保存至安全上下文
+
