@@ -11,8 +11,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("redirect:/login");
+        //默认url根路径跳转到/logi，此url为spring security提供
+        //registry.addViewController("/").setViewName("redirect:/login");
 
+        registry.addViewController("/").setViewName("redirect:/login-view");
+        registry.addViewController("/login-view").setViewName("login");
     }
 
 }
