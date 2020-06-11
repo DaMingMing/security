@@ -18,3 +18,7 @@
 --->委托DaoAuthenticationProvider验证--->通过UserDetailService判断用户是否存在--->存在则返回查询到UserDetails
 --->通过密码编码器对比UserDetails跟用户输入的密码是否一致--->一致后将用户信息Authentication保存至安全上下文
 
+授权流程：
+认证通过后用户访问受保护的资源--->被FilterSecurityInterceptor拦截--->SecurityMetadatasource获取访问当前资源所需要的的权限并返回Collection
+--->AccessDecisionnManager（决策管理器）通过投票决策--->默认实现类AffirmativeBased通过对比资源所需要的权限、用户所有的权限，投票决策
+--->决策通过--->允许访问资源，请求放行
