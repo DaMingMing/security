@@ -22,3 +22,14 @@
 认证通过后用户访问受保护的资源--->被FilterSecurityInterceptor拦截--->SecurityMetadatasource获取访问当前资源所需要的的权限并返回Collection
 --->AccessDecisionnManager（决策管理器）通过投票决策--->默认实现类AffirmativeBased通过对比资源所需要的权限、用户所有的权限，投票决策
 --->决策通过--->允许访问资源，请求放行
+
+
+会话：
+用户认证通过后，为了避免用户的每次操作都进行认证可将用户的信息保存在会话中。spring security提供会话管
+理，认证通过后将身份信息放入SecurityContextHolder上下文，SecurityContext与当前线程进行绑定，方便获取
+用户身份。
+会话有四种机制：
+1、always--如果没有session存在就创建一个
+2、ifRequired--如果需要就创建一个Session（默认）登录时
+3、never--SpringSecurity 将不会创建Session，但是如果应用中其他地方创建了Session，那么SpringSecurity将会使用它。
+4、stateless--SpringSecurity将绝对不会创建Session，也不使用Session，这种无状态架构适用于REST API及其无状态认证机制。
