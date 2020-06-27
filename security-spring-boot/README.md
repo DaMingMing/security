@@ -23,6 +23,11 @@
 --->AccessDecisionnManager（决策管理器）通过投票决策--->默认实现类AffirmativeBased通过对比资源所需要的权限、用户所有的权限，投票决策
 --->决策通过--->允许访问资源，请求放行
 
+授权的方式包括 web授权和方法授权，web授权是通过 url拦截进行授权，方法授权是通过 方法拦截进行授权。他
+们都会调用accessDecisionManager进行授权决策，若为web授权则拦截器为FilterSecurityInterceptor；若为方
+法授权则拦截器为MethodSecurityInterceptor。如果同时通过web授权和方法授权则先执行web授权，再执行方
+法授权，最后决策通过，则允许访问资源，否则将禁止访问
+
 
 会话：
 用户认证通过后，为了避免用户的每次操作都进行认证可将用户的信息保存在会话中。spring security提供会话管
