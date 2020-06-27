@@ -28,8 +28,13 @@ public class SpringDataUserDetailsService implements UserDetailsService {
             //如果用户查不到，返回null，由provider来抛出异常
             return null;
         }
-        UserDetails userDetails = User.withUsername(userDto.getUsername()).password(userDto.getPassword()).authorities("p1").build();
-        //UserDetails userDetails = User.withUsername("zhangsan").password("$2a$10$aFsOFzujtPCnUCUKcozsHux0rQ/3faAHGFSVb9Y.B1ntpmEhjRtru").authorities("p1").build();
+        //查询用户权限
+        List<String> permissions = userDao.findPermissionsByUserId(userDto.getId());
+        //将权限转成数组
+        String[] peArrray = new String[permissions.size()];
+        permissions.toArray(peArrray);
+        //创建userDetails
+        UserDetails userDetails = User.withUsername(userDto.getFullname()).password(userDto.getPassword()).authorities(peArrray).build();
         return userDetails;
     }
 }
