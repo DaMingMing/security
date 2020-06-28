@@ -1,5 +1,6 @@
 package com.keymao.security.springboot.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ public class LoginController {
      * @return
      */
     @GetMapping(value = "/r/r1",produces = {"text/plain;charset=UTF-8"})
+    @PreAuthorize("hasAuthority('p1')")  //拥有p1权限方可访问
     public String r1(){
         return getUsername() + " 访问资源1";
     }
@@ -31,6 +33,7 @@ public class LoginController {
      * @return
      */
     @GetMapping(value = "/r/r2",produces = {"text/plain;charset=UTF-8"})
+    @PreAuthorize("hasAuthority('p2')")  //拥有p2权限方可访问
     public String r2(){
         return getUsername() + " 访问资源2";
     }

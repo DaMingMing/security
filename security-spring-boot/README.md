@@ -26,7 +26,14 @@
 授权的方式包括 web授权和方法授权，web授权是通过 url拦截进行授权，方法授权是通过 方法拦截进行授权。他
 们都会调用accessDecisionManager进行授权决策，若为web授权则拦截器为FilterSecurityInterceptor；若为方
 法授权则拦截器为MethodSecurityInterceptor。如果同时通过web授权和方法授权则先执行web授权，再执行方
-法授权，最后决策通过，则允许访问资源，否则将禁止访问
+法授权，最后决策通过，则允许访问资源，否则将禁止访问。
+
+web授权注意：
+规则的顺序是重要的,更具体的规则应该先写；
+
+方法授权：
+有三种注解方式：@PreAuthorize,@PostAuthorize, @Secured，一般建议使用PreAuthorize，且在控制层注解；
+
 
 
 会话：
