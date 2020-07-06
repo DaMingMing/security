@@ -80,8 +80,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
-                .authenticationManager(authenticationManager) //密码模式需要
-                .authorizationCodeServices(authorizationCodeServices) //授权码模式需要
+                .authenticationManager(authenticationManager) //认证管理器 密码模式需要
+                .authorizationCodeServices(authorizationCodeServices) //授权码服务 授权码模式需要
                 .tokenServices(tokenService())  //令牌管理服务
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST);  //允许post提交
     }
@@ -97,8 +97,10 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
                 .checkTokenAccess("permitAll()") //checkToken这个endpoint完全公开  /oauth/check_token
                 .allowFormAuthenticationForClients(); //允许表单认证
     }
-/*    @Bean
-    public AuthorizationCodeServices authorizationCodeServices() { //设置授权码模式的授权码如何存取，暂时采用内存方式
+
+    //设置授权码模式的授权码如何存取，暂时采用内存方式
+    @Bean
+    public AuthorizationCodeServices authorizationCodeServices() {
         return new InMemoryAuthorizationCodeServices();
-    }*/
+    }
 }
