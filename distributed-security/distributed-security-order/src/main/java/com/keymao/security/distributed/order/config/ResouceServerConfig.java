@@ -1,5 +1,6 @@
 package com.keymao.security.distributed.order.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,16 +11,21 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResouceServerConfig extends ResourceServerConfigurerAdapter {
+    @Autowired
+    private TokenStore tokenStore;
+
     public static final String RESOURCE_ID = "res1";
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId(RESOURCE_ID) //资源ID
-                .tokenServices(tokenService())   //验证令牌服务
+                //.tokenServices(tokenService())   //验证令牌服务
+                .tokenStore(tokenStore)
                 .stateless(true);
     }
 
@@ -32,7 +38,7 @@ public class ResouceServerConfig extends ResourceServerConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
-    //资源服务令牌解析服务
+/*    //资源服务令牌解析服务
     @Bean
     public ResourceServerTokenServices tokenService() {
         //使用远程服务请求授权服务器校验token,必须指定校验token 的url、client_id，client_secret
@@ -41,5 +47,5 @@ public class ResouceServerConfig extends ResourceServerConfigurerAdapter {
         service.setClientId("c1");
         service.setClientSecret("secret");
         return service;
-    }
+    }*/
 }

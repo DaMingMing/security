@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
     @GetMapping(value = "/r1")
-    @PreAuthorize("hasAnyAuthority('p2')")  //拥有P1权限方可访问此url
+    @PreAuthorize("hasAnyAuthority('p1')")  //拥有P1权限方可访问此url
     public String r1(){
         return "访问资源1";
     }
